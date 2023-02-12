@@ -19,8 +19,11 @@ func ConnectToDataBase(host string, username string, password string) *DataBase 
 	cred.Username = username
 	cred.Password = password
 
+	connStr := "mongodb+srv://doadmin:3Uz59w1m02V76oyk@db-mongodb-blr1-59698-480f7686.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=db-mongodb-blr1-59698"
+
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	clientOptions := options.Client().ApplyURI("mongodb://" + host + ":27017").SetAuth(cred)
+	serverAPIOptions := options.ServerAPI(options.ServerAPIVersion1)
+	clientOptions := options.Client().ApplyURI(connStr).SetServerAPIOptions(serverAPIOptions)
 	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
 		log.Fatal(err)

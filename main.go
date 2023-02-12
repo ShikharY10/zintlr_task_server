@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	db := config.ConnectToDataBase("127.0.0.1", "rootuser", "rootpass")
+	db := config.ConnectToDataBase("mongodb+srv://db-mongodb-blr1-59698-480f7686.mongo.ondigitalocean.com", "doadmin", "3Uz59w1m02V76oyk")
 	controller := controllers.Controller{
 		DB: db,
 	}
