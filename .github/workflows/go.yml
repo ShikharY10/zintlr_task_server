@@ -16,9 +16,9 @@ jobs:
       - name: Deploy Golang App
         uses: appleboy/ssh-action@v0.1.2
         with:
-          host: ${{secrets.SSH_HOST}}
-          key: ${{secrete.SSH_KEY}}
-          username: ${{secrete.SSH_USERNAME}}
+          host: ${{ secrets.SSH_HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          username: ${{ secrets.SSH_USERNAME }}
           
           script: |
             mkdir deploy
