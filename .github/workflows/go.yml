@@ -23,5 +23,5 @@ jobs:
           script: |
             mkdir deploy
             cd deploy
-            git clone git@github.com:ShikharY10/zintlr_task_server.git
+            git clone https://github.com/ShikharY10/zintlr_task_server.git
             echo "Deployment successful to Digital Ocean"
