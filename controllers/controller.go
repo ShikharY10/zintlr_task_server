@@ -129,7 +129,22 @@ func (ctrl *Controller) GetRandomPost(c *gin.Context) {
 	}
 }
 
-func (ctrl *Controller) GetPostsBasedOnTags(c *gin.Context) {}
+func (ctrl *Controller) DeleteAccount(c *gin.Context) {
+	id := c.Query("id")
+	if len(id) > 0 {
+		filter := bson.D{{Key: "_id", Value: id}}
+		result, err := ctrl.DB.Users.DeleteOne(context.TODO(), filter)
+		if err != nil {
+			c.AbortWithStatus(400)
+		} else {
+			if result.DeletedCount == 1 {
+				c.JSON(200, "Successfully Deleted")
+			} else {
+				c.AbortWithStatus(400)
+			}
+		}
+	}
+}
 
 func shuffle(slice interface{}) {
 	rv := reflect.ValueOf(slice)

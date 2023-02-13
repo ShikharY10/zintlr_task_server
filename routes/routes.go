@@ -11,5 +11,5 @@ func Routes(router *gin.Engine, controller controllers.Controller) {
 	user.POST("/register", controller.RegisterUser)
 	user.POST("/addpost", controller.AddPost)
 	user.GET("/getrandompost", controller.GetRandomPost)
-	user.GET("/getpost", controller.GetPostsBasedOnTags)
+	user.GET("/delete", controller.DeleteAccount)
 }
