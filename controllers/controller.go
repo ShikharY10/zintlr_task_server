@@ -132,15 +132,20 @@ func (ctrl *Controller) GetRandomPost(c *gin.Context) {
 func (ctrl *Controller) DeleteAccount(c *gin.Context) {
 	id := c.Query("id")
 	if len(id) > 0 {
-		filter := bson.D{{Key: "_id", Value: id}}
+		objectId, err := primitive.ObjectIDFromHex(id)
+		if err != nil {
+			fmt.Println("bad id")
+			return
+		}
+		filter := bson.D{{Key: "_id", Value: objectId}}
 		result, err := ctrl.DB.Users.DeleteOne(context.TODO(), filter)
 		if err != nil {
-			c.AbortWithStatus(400)
+			c.AbortWithStatusJSON(400, "error while deleting")
 		} else {
-			if result.DeletedCount == 1 {
+			if result.DeletedCount > 0 {
 				c.JSON(200, "Successfully Deleted")
 			} else {
-				c.AbortWithStatus(400)
+				c.AbortWithStatusJSON(400, "wrong")
 			}
 		}
 	}

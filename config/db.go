@@ -14,12 +14,7 @@ type DataBase struct {
 	Posts *mongo.Collection
 }
 
-func ConnectToDataBase(host string, username string, password string) *DataBase {
-	var cred options.Credential
-	cred.Username = username
-	cred.Password = password
-
-	connStr := "mongodb+srv://doadmin:3Uz59w1m02V76oyk@db-mongodb-blr1-59698-480f7686.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=db-mongodb-blr1-59698"
+func ConnectToDataBase(connStr string) *DataBase {
 
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 	serverAPIOptions := options.ServerAPI(options.ServerAPIVersion1)
